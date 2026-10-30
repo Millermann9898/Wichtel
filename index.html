@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gibt es Wichtel wirklich? Die Spurensuche!</title>
+    
+    <style>
+        /* Magisches, violettes Wichtel-Design mit vollständig angepassten Wortfarben */
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+            background-color: #1e112a; /* Mystisches, sehr dunkles Violett als Hintergrund */
+            color: #fef08a; /* ALLE normalen Worte und Texte sind jetzt standardmäßig Pastell-Gelb */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Dekorative Leiste über dem Header */
+        .forest-decor {
+            font-size: 2rem;
+            padding: 10px;
+            letter-spacing: 15px;
+            background-color: #4a2060; /* Dunkles Lila */
+            width: 100%;
+            text-align: center;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3);
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #3b1154, #581c87); /* Violetter Farbverlauf */
+            width: 100%;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.6rem;
+            color: #22d3ee; /* Leuchtendes Neon-Cyan für die Hauptüberschrift */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #c084fc; /* Flieder für die Unterüberschrift im Header */
+            margin-top: 10px;
+        }
+
+        main {
+            max-width: 850px;
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        /* Karten-Layout für Inhalte */
+        .card {
+            background-color: #2e1a40; /* Mittleres Violett für die Textboxen */
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            border: 4px solid #581c87; /* Dunkellila Rand */
+        }
+
+        /* Alle Absätze und Fließtexte in den Karten */
+        .card p {
+            color: #fef08a; /* Pastell-Gelb für alle normalen Beschreibungstexte */
+        }
+
+        /* Besondere Hervorhebung für die obere Karte */
+        .highlight-card {
+            border: 4px dashed #22d3ee; /* Cyanfarbene, gestrichelte Umrandung */
+        }
+
+        h2 {
+            color: #22d3ee; /* Leuchtendes Cyan-Blau für alle h2-Überschriften */
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #c084fc; /* Helles Flieder für Galerieüberschriften */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* --- UPLOAD BEREICH --- */
+        .upload-box {
+            background-color: #251435; /* Etwas dunkleres Violett im Inneren */
+            border: 3px dashed #a855f7;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .upload-box p {
+            color: #fef08a; /* Gelber Text innerhalb der Upload-Box */
+        }
+
+        /* Standard-Dateianzeiger verstecken und stylen */
+        input[type="file"] {
+            display: none;
+        }
+
+        .input-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: 2px solid #581c87;
+            background-color: #3b1154;
+            color: #22d3ee; /* Eingegebener Text leuchtet in Cyan */
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #a855f7; /* Violetter Platzhaltertext */
+        }
+
+        input[type="text"]:focus {
+            border-color: #22d3ee;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+
+        .btn-green { background-color: #10b981; color: #1e112a; } 
+        .btn-red { background-color: #ef4444; color: #ffffff; }
+        .btn-yellow { background-color: #d97706; color: #1e112a; }
+
+        .vote-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        /* --- BENUTZER GALERIE --- */
+        .user-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+            min-height: 100px;
+            background-color: #251435;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .gallery-card {
+            background-color: #3b1154;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #581c87;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .gallery-card p {
+            font-size: 0.85rem;
+            margin: 8px 0 0 0;
+            color: #22d3ee; /* Cyanfarbener Ortstext unter hochgeladenen Bildern */
+            font-weight: bold;
+        }
+
+        .empty-msg {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #c084fc; /* Flieder für die "Keine Bilder"-Meldung */
+            font-style: italic;
+            padding: 20px;
+        }
+
+        /* Abstimmungs-Ergebnisbox */
+        .result-box {
+            margin-top: 25px;
+            background-color: #3b1154;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #22d3ee;
+        }
+
+        .result-box h3 {
+            color: #22d3ee; /* Cyan für die Überschrift des Ergebnisses */
+        }
+
+        #voteMessage {
+            color: #fef08a; /* Gelb für die Auswertungsnachricht */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #a855f7; /* Violett für den Footer-Text */
+            width: 100%;
+            background-color: #120a1a;
+        }
+
+        footer p {
+            color: #a855f7;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dekorative Hintergrund-Elemente für echtes Wichtel-Feeling -->
+    <div class="forest-decor">🍄 ✨ 🌿 🪵 ✨ 🍄</div>
+
+    <header>
+        <h1>🍄 Das große Wichtel-Forschungszentrum 🌿</h1>
+        <p>Existieren die kleinen Wesen wirklich? Lade deine Beweise hoch!</p>
+    </header>
+
+    <main>
+        <!-- Die Leitfrage -->
+        <section class="card text-center highlight-card">
+            <h2>Die große Frage: Leben sie unter uns?</h2>
+            <p>Ob im tiefen Moos des Waldes, hinter der Fußleiste im Altbau oder im hohlen Baumstamm: Überall auf der Welt gibt es Berichte über kleine Naturgeister. Auf dieser Seite sammeln wir Beweise, um dem Geheimnis endlich auf die Spur zu kommen!</p>
+        </section>
+
+        <!-- Interaktiver Wichtel-Foto-Upload -->
+        <section class="card upload-section">
+            <h2>📸 Wichtel-Sichtung hochladen</h2>
+            <p>Hast du einen Wichtel gesehen oder glaubst du, Spuren (wie winzige Fußabdrücke) fotografiert zu haben? Teile dein Bild mit unserer Wichtel-Community!</p>
+            
+            <div class="upload-box">
+                <input type="file" id="wichtelImageInput" accept="image/*" onchange="vorschauBild(event)">
+                <label for="wichtelImageInput" class="btn btn-yellow">📁 Bild auswählen</label>
+                
+                <div class="input-group">
+                    <input type="text" id="sichtungsOrt" placeholder="Wo hast du es gesehen? (z.B. Im Stadtwald)">
+                    <button class="btn btn-red" onclick="wichtelFotoHinzufuegen()">In die Galerie hochladen! 🚀</button>
+                </div>
+            </div>
+
+            <!-- Dynamische Galerie hochgeladener Bilder -->
+            <div class="user-gallery-container">
+                <h3>Die neuesten Entdeckungen unserer Forscher:</h3>
+                <div id="userGallery" class="user-gallery">
+                    <p id="noImagesMessage" class="empty-msg">Noch keine Beweisfotos hochgeladen. Sei der Erste!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interaktives Umfrage-Modul -->
+        <section class="card text-center">
+            <h2>Deine Meinung zählt!</h2>
+            <p>Glaubst du an die Existenz von Wichteln, Heinzelmännchen oder Kobolden?</p>
+            
+            <div class="vote-buttons">
+                <button class="btn btn-green" onclick="abstimmen('ja')">Ja, absolut! 🌲</button>
+                <button class="btn btn-yellow" onclick="abstimmen('vielleicht')">Möglich wäre es... 🔍</button>
+                <button class="btn btn-red" onclick="abstimmen('nein')">Nein, reine Fantasie. ❌</button>
+            </div>
+
+            <div id="voteResult" class="result-box hidden">
+                <h3>Vielen Dank für deine Stimme!</h3>
